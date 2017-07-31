@@ -54,7 +54,8 @@ class TwoLayerNet(minpy.nn.model.ModelBase):
         return layers.softmax_loss(predict, y)
 ```
 
-By default, MXNet implementations for GPU operations will be run. Any fallback will run transparently on the CPU.
+By default, MXNet implementations for GPU operations will be run. Any **fallback will run transparently on the CPU**.
+
 During the development of this proof of concept, the limitations and pitfalls were:
 
 * Not support in-place array operations
@@ -66,6 +67,7 @@ Anyway, for the limitations I recommend to check their if there were any update.
 #### How faster is than numpy?
 
 ###### Dot product comparison
+The very basic operation, dot product, is much faster on mimpy.
 
 ```python
 
@@ -94,6 +96,7 @@ with gpu(0):
 * **CPU** Performance: **0.016882** s/iter
 * **GPU** Performance: **0.001476** s/iter
 
+###### RGB to Gray example
 But remember, **GPU is not always faster than CPU**, no matter the framework you use.
 
 ```python
