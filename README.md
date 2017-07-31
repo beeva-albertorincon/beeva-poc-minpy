@@ -18,6 +18,8 @@ In that direction, the document below tries to answer the following questions:
 
 In other words, it allows you to use both numpy and MXNet within a **single interface**.
 
+Although it is a said to be a deep learning tool, you can work with it like it were just numpy, so you have a more general tool.
+
 In addition, it includes [support for TensorBoard visualization](http://minpy.readthedocs.io/en/latest/tutorial/visualization_tutorial/minpy_visualization.html).
 
 #### What does it let you do?
@@ -66,8 +68,9 @@ Anyway, for the limitations I recommend to check their if there were any update.
 
 #### How faster is than numpy?
 
+It is faster when the operation has GPU support and the problem meets the requirements to perform better than in CPU. But I can say that the worst you can get is the same performance as in classic numpy, as long as you use minpy properly.
+
 ###### Dot product comparison
-The very basic operation, dot product, is much faster on mimpy.
 
 ```python
 n=100
@@ -97,8 +100,48 @@ with gpu(0):
 * **CPU** Performance: **0.016882** s/iter
 * **GPU** Performance: **0.001476** s/iter
 
+###### np.sum
+```python
+
+n = 100
+
+with cpu():
+    t1 = time.time()
+    for i in xrange(n):
+        sum_cpu = np.sum(face)
+    t2 = time.time()
+
+with gpu(0):
+    t3 = time.time()
+    for i in xrange(n):
+        sum_gpu0 = np.sum(face_minpy)
+    t4 = time.time()
+
+```
+
+* **CPU** Performance: **0.024083** s/iter
+* **GPU** Performance: **0.000057** s/iter
+
+###### Filtering arrays
+```python
+n = 5
+with cpu():
+    t1 = time.time()
+    for i in xrange(n):
+        bool_cpu = face[face > 100]
+    t2 = time.time()
+
+with gpu(0):
+    t3 = time.time()
+    for i in xrange(n):
+        T_gpu0 = face_minpy[face_minpy > 100]
+    t4 = time.time()
+```
+
+* **CPU** Performance: **0.004746** s/iter
+* **GPU** Performance: **7.868544** s/iter
 ###### RGB to Gray example
-But remember, **GPU is not always faster than CPU**, no matter the framework you use.
+Even for embarrassing parallel tasks. If you are IO bounded and not CPU bounded, you could get no advantages by using GPU.
 
 ```python
 
@@ -121,3 +164,14 @@ with gpu(0):
 ```
 * **CPU** Performance: **0.009076** s
 * **GPU** Performance: **0.889298** s
+
+#### Impressions
+
+I found minpy as a simple way to move numpy operations to gpu. Because of the transparent fallback to CPU, the only thing you can get in the worse case is the same performance as with classic numpy.
+
+Because is too easy to pass from classic NDArray to minpy array, I could even work with images loaded from scipy.
+
+The point of using tensorboard with another framework different than tensorflow is very good.
+
+#### Future work
+The library is focused on deep learning, maybe as Kera's competitor, so I think that it would be good to compare them in real deep learning problems.
