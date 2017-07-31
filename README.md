@@ -141,7 +141,7 @@ with gpu(0):
 * **CPU** Performance: **0.004746** s/iter
 * **GPU** Performance: **7.868544** s/iter
 ###### RGB to Gray example
-Even for embarrassing parallel tasks. If you are IO bounded and not CPU bounded, you could get no advantages by using GPU.
+Even for embarrassing parallel tasks, if you are IO bounded and not CPU bounded, you could get no advantages by using GPU.
 
 ```python
 
