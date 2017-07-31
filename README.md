@@ -18,7 +18,7 @@ In that direction, the document below tries to answer the following questions:
 
 In other words, it allows you to use both numpy and MXNet within a **single interface**.
 
-Although it is a said to be a deep learning tool, you can work with it like it were just numpy, so you have a more general tool.
+Although it is said to be a deep learning tool, you can work with it like it were just numpy, so you have a more general tool.
 
 In addition, it includes [support for TensorBoard visualization](http://minpy.readthedocs.io/en/latest/tutorial/visualization_tutorial/minpy_visualization.html).
 
@@ -122,7 +122,7 @@ with gpu(0):
 * **CPU** Performance: **0.024083** s/iter
 * **GPU** Performance: **0.000057** s/iter
 
-###### Filtering arrays
+###### Boolean filtering arrays
 ```python
 n = 5
 with cpu():
