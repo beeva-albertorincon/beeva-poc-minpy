@@ -70,6 +70,7 @@ Anyway, for the limitations I recommend to check their if there were any update.
 The very basic operation, dot product, is much faster on mimpy.
 
 ```python
+n=100
 
 with cpu():
     x_cpu = random.rand(1024, 1024) - 0.5
@@ -102,21 +103,21 @@ But remember, **GPU is not always faster than CPU**, no matter the framework you
 ```python
 
 from scipy import misc
+
+# Image is 1024x768
 face = misc.imread('face.png') # Classic numpy array
 face_minpy = np.array(face) # minpy array
 
 with cpu():
     t1 = time.time()
-    for i in xrange(n):
-        gray_cpu = np.dot(face, np.array([0.299, 0.587, 0.114]))
+    gray_cpu = np.dot(face, np.array([0.299, 0.587, 0.114]))
     t2 = time.time()
 
 with gpu(0):
     t3 = time.time()
-    for i in xrange(n):
-        gray_gpu0 = np.dot(face_minpy, np.array([0.299, 0.587, 0.114]))
+    gray_gpu0 = np.dot(face_minpy, np.array([0.299, 0.587, 0.114]))
     t4 = time.time()
 
 ```
-* **CPU** Performance: **0.009076** s/iter
-* **GPU** Performance: **0.889298** s/iter
+* **CPU** Performance: **0.009076** s
+* **GPU** Performance: **0.889298** s
